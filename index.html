@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <div class='background'>
+        <div>
+            <img class='title' src="img/arcade-font-writer.png" alt="iron fighters">
+            <button id='start-button'>StartGame </button>
+            <audio id="audio-fight" src="audio/fightaudio.mp3" loop></audio>
+            <audio id="audio-punch" src="audio/punch.mp3"></audio>
+            <audio id="audio-kick" src="audio/kick.mp3"></audio>
+
+            <canvas id="canvas"></canvas>
+            <div class='end-game'>
+                <p>END GAME</p>
+                <button id='restart-button' disabled>Restart Game</button>
+            </div>
+            <div class="character-selection">
+                <ul>
+                    <li><button id="Wizard" class="btn"><img src="img/wizardSelect.png" alt="Wizard character select"><span>Wizard</span></button></li>
+                    <li><button id="Ninja" class="btn"><img src="img/ninjaSelect.png" alt="ninja character select"><span>Ninja</span></button></li>
+                    <li><button id="Warrior" class="btn"><img src="img/warriorSelect.png" alt="Warrior character select"><span>Warrior</span></button></li>
+                </ul>
+            </div>
+
+            <footer class="actions">
+                <div class="attacks">
+                    <button class="btn punch">Punch (A)</button>
+                    <button class="btn kick">Kick (D)</button>
+                </div>
+                <div class="movement">
+                    <button class="btn left">
+                        <img src="img/arrowLeft.png" alt="left arrow icon">
+                    </button>
+                    <button class="btn jump">
+                        <img src="img/arrowUp.png" alt="up arrow icon">
+                    </button>
+                    <button class="btn right">
+                        <img src="img/arrowRight.png" alt="right arrow icon">
+
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/canvasBackground.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/NPC.js"></script>
+    <script src="js/lifeBar.js"></script>
+    <script src="js/app.js"></script>
+
+
+</body>
+
+</html>
