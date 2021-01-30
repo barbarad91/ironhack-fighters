@@ -17,15 +17,14 @@ class Player {
         this.playerValidAttack = false
 
         this.framesObject = [
-            { name: 'move', frames: 6 },
-            { name: 'punch', frames: 5 },
-            { name: 'kick', frames: 6 },
-            { name: 'rest', frames: 4 },
-            { name: 'jump', frames: 6 }
+            { status: 'move', frames: 6 },
+            { status: 'punch', frames: 5 },
+            { status: 'kick', frames: 6 },
+            { status: 'rest', frames: 4 },
+            { status: 'jump', frames: 6 }
         ]
 
         this.imageInstance = new Image()
-        this.imageInstance.framesIndex = 0
 
         this.characters = []
         this.character = character
@@ -34,25 +33,41 @@ class Player {
         this.audioKick.volume = 0.6
         this.audioPunch = document.querySelector("#audio-punch")
         this.audioPunch.volume = 0.6
+
+        this.preloadedImages = this.generateImages()
     }
 
     // Draw player
 
     //#region aux functions
 
-    transformStatusToCamelCase() {
-        return this.status.charAt(0).toUpperCase() + this.status.slice(1)
+    generateImages() {
+        return this.framesObject.map(({ status, frames }) => {
+            const image = new Image()
+            image.framesIndex = 0
+            image.src = this.createInstanceSrc(this.playerType, this.character, status)
+            image.frames = frames
+
+            return {
+                status,
+                image
+            }
+        })
     }
 
-    createInstanceSrc() {
-            return `animation/${this.playerType}${this.character}${this.transformStatusToCamelCase()}.png`
-        }
-        //#endregion aux functions
+
+    transformStatusToCamelCase(status) {
+        return status.charAt(0).toUpperCase() + status.slice(1)
+    }
+
+    createInstanceSrc(playerType, character, status) {
+        return `animation/${playerType}${character}${this.transformStatusToCamelCase(status)}.png`
+    }
+
+    //#endregion aux functions
 
     drawPlayer(frames) {
-
-        this.imageInstance.src = this.createInstanceSrc()
-        this.imageInstance.frames = this.framesObject.find(elm => elm.name === this.status).frames
+        this.imageInstance = this.preloadedImages.find(elm => elm.status === this.status).image
 
         this.ctx.drawImage(
             this.imageInstance,
